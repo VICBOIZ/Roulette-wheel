@@ -16,13 +16,13 @@ class Roulette:
         self.name=input("Enter your character name  ")
         print("Hello! ",str.upper(self.name) , "Welcome to Roulette Wheel")
         print("You have a reward of 40 Coins")
-        #sleep(1) 
+        sleep(1) 
         print("GAME RULE!")
-        #sleep(2) 
+        sleep(2) 
         print("ENTER YOUR BET BY TYPE IN THE NUMBER 0 TO 36  OR COLOR   OR black")
-        #sleep(2) 
+        sleep(2) 
         print("IF THE WINNING NUMBER AND YOUR NUMBER IS MATCHED! YOU WIN X36 OF YOUR BET")
-        #sleep(2) 
+        sleep(2) 
         print("IF YOUR PICKS AND THE WINNING NUMBER IS MATCHED! ")
             
         print("YOU DOUBLE YOUR BET")
@@ -53,10 +53,11 @@ class Roulette:
         elif bet > self.balance:
             print("You don't have that much coins left!!")
             self.picking()
+
     def play(self):
         self.selected={}
         self.picking()
-        winning_number= random.randint(0,37)
+        winning_number= random.randint(-1,37)
         print("Winning Number ",str(winning_number))    
         if self.selected.keys==winning_number :
             print("YOU WON!!")
@@ -104,22 +105,17 @@ class Roulette:
         print("----------------------------------")
         print("|1. PLAY AGAIN(Y)   |  2. QUIT(N) ")
         print("----------------------------------")
-        choice=input("Do you want to give it another try?:")
-        if choice == "1" or choice.upper()== "YES" or choice.upper()=="Y":     
-            return
+        choice=str(input("Do you want to give it another try?:"))
+        if choice == "1" or choice.upper()== "YES" or choice.upper()=="Y":  
+            self.balance = 40   
+            self.play()
         elif choice == "2" or choice.upper()=="NO" or choice.upper()=="N":
             print("GOOD BYE", self.name)
             exit()
         else:
             print("Please Enter YES/NO or 1|2:")
-            
-    def check(self):
-        if self.balance == 0:
             self.ask()
-        elif self.balance > 0:
-            print("Your Current balance is:",self.balance)
-            self.play()
-
+    
 
 
 
