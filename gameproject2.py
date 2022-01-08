@@ -19,13 +19,47 @@ class Roulette:
         sleep(1) 
         print("GAME RULE!")
         sleep(2) 
-        print("ENTER YOUR BET BY TYPE IN THE NUMBER 0 TO 36  OR COLOR   OR black")
+        print("ENTER YOUR BET BY TYPE IN THE NUMBER 0 TO 36 , ODD/EVEN OR BLACK/RED")
         sleep(2) 
-        print("IF THE WINNING NUMBER AND YOUR NUMBER IS MATCHED! YOU WIN X36 OF YOUR BET")
+        print("IF THE WINNING NUMBER AND YOUR NUMBER IS MATCHED! YOU WIN X35 OF YOUR BET")
         sleep(2) 
         print("IF YOUR PICKS AND THE WINNING NUMBER IS MATCHED! ")
             
         print("YOU DOUBLE YOUR BET")
+    def play(self):
+        self.selected={}
+        self.picking()
+        winning_number= random.randint(-1,37)
+        print("Winning Number ",str(winning_number))    
+        if self.selected.keys==winning_number :
+            print("YOU WON!!")
+            print("You Total Coin is" ,str(self.balance))
+            self.balance = (self.bet*35)+ self.balance
+            return self.balance
+        elif self.selected.keys =="red" and winning_number in self.color_pick_red:
+            print("YOU WON!!")
+            self.balance=(self.balance +(self.bet*2))
+            print("Your Total Coin is" ,str(self.balance))
+            return self.balance
+        elif self.selected.keys=="black" and winning_number in self.color_pick_black:
+            print("YOU WON!!")
+            self.balance=self.balance +(self.bet*2)
+            print("Your Total Coin is" ,str(self.balance))
+            return self.balance
+        elif self.selected.keys=="odd" and winning_number in self.number_pick_odd:
+            print("YOU WON!!")
+            self.balance=self.balance +(self.bet*2)
+            print("Your Total Coin is" ,str(self.balance))
+            return self.balance
+        elif self.selected.keys=="even" and winning_number in self.number_pick_even:
+            print("YOU WON!!")
+            self.balance=self.balance +(self.bet*2)
+            print("Your Total Coin is" ,str(self.balance))
+            return self.balance
+        else:
+            print("YOU LOST!")
+            self.check()
+    
     def  picking(self):
         while self.balance > 0:
             self.pick = input("PLACE YOUR PICK: ")
@@ -34,6 +68,11 @@ class Roulette:
                 self.bet()
                 self.decicions()
                 return  
+            elif self.pick.upper()=="ODD"  or self.pick.upper()=="EVEN":
+                print("You picked",str.upper(self.pick) )
+                self.bet()
+                self.decicions()
+                return    
             elif int(self.pick)>=0 and int(self.pick)<=36:
                 print("You picked",str (self.pick))
                 self.bet()
@@ -53,31 +92,7 @@ class Roulette:
         elif bet > self.balance:
             print("You don't have that much coins left!!")
             self.picking()
-
-    def play(self):
-        self.selected={}
-        self.picking()
-        winning_number= random.randint(-1,37)
-        print("Winning Number ",str(winning_number))    
-        if self.selected.keys==winning_number :
-            print("YOU WON!!")
-            print("You Total Coin is" ,str(self.balance))
-            self.balance = (self.bet*36)+ self.balance
-            return self.balance
-        elif self.selected.keys =="red" and winning_number in self.color_pick_red:
-            print("YOU WON!!")
-            self.balance=(self.balance +(self.bet*2))
-            print("Your Total Coin is" ,str(self.balance))
-            return self.balance
-        elif self.selected.keys=="black" and winning_number in self.color_pick_black:
-            print("YOU WON!!")
-            self.balance=self.balance +(self.bet*2)
-            print("Your Total Coin is" ,str(self.balance))
-            return self.balance
-        else:
-            print("YOU LOST!")
-            self.check()
-        
+    
     def check(self):
         if self.balance == 0:
             self.ask()
@@ -116,9 +131,6 @@ class Roulette:
             print("Please Enter YES/NO or 1|2:")
             self.ask()
     
-
-
-
 x=Roulette(40)
 x.rule()
 x.play()
