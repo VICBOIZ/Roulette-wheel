@@ -79,7 +79,7 @@ class Roulette:
                 self.decicions()
                 return 
             else :
-                print("Your have pick an invalid pick. Please try to enter your pick again.")
+                print("You have pick an invalid pick. Please try to enter your pick again.")
                 continue   
  
     def bet(self):
